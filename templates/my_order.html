@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Orders</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <h1>📦 My Orders</h1>
+    <nav>
+      <a href="/" class="btn">🏠 Home</a>
+      <a href="/logout" class="btn logout">🚪 Logout</a>
+    </nav>
+  </div>
+
+  <div style="padding:20px;">
+    {% if orders %}
+    <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse;">
+      <tr style="background:#555; color:white;">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+      </tr>
+      {% for o in orders %}
+      <tr>
+        <td>{{ o.id }}</td>
+        <td>{{ o.full_name }}</td>
+        <td>{{ o.phone }}</td>
+        <td>{{ o.email }}</td>
+        <td>{{ o.city }}</td>
+        <td>{{ o.state }}</td>
+        <td>{{ o.country }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+      <p>No orders yet.</p>
+    {% endif %}
+  </div>
+</body>
+</html>

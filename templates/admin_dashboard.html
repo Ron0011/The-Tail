@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - PetShop</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <h1>Welcome, Admin!</h1>
+    <nav>
+      <a href="/add-pet" class="btn">➕ Add Pet</a>
+      <a href="/" class="btn">🏠 View Home</a>
+      <a href="/logout" class="btn logout">🚪 Logout</a>
+    </nav>
+  </div>
+
+  <div style="padding:20px;">
+
+    <h2>👤 Registered Users</h2>
+    <table border="1" cellpadding="8" cellspacing="0" style="width:100%; margin-bottom:30px; border-collapse:collapse;">
+      <tr style="background:#555; color:white;">
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+      </tr>
+      {% for u in users %}
+      <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.username }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ u.role }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <h2>📦 Orders</h2>
+    <table border="1" cellpadding="8" cellspacing="0" style="width:100%; margin-bottom:30px; border-collapse:collapse;">
+      <tr style="background:#555; color:white;">
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+      </tr>
+      {% for o in orders %}
+      <tr>
+        <td>{{ o.id }}</td>
+        <td>{{ o.user_id }}</td>
+        <td>{{ o.full_name }}</td>
+        <td>{{ o.phone }}</td>
+        <td>{{ o.email }}</td>
+        <td>{{ o.city }}</td>
+        <td>{{ o.state }}</td>
+        <td>{{ o.country }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <h2>🐶 Pets</h2>
+    <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse;">
+      <tr style="background:#555; color:white;">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Age</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+      {% for p in pets %}
+      <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.type }}</td>
+        <td>{{ p.age }}</td>
+        <td>{{ p.description }}</td>
+        <td>
+          <form method="post" action="/admin/delete_pet/{{ p.id }}" style="display:inline;">
+            <button type="submit" class="btn" style="background:red;">❌ Remove</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+  </div>
+</body>
+</html>

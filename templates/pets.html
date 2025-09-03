@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Available Pets</title>
+    <link rel="stylesheet" href="/static/pet.css">
+</head>
+<body>
+    <h1>🐶 Available Pets</h1>
+    <ul>
+        {% for pet in pets %}
+            <li>{{ pet.name }} ({{ pet.animal }})</li>
+        {% endfor %}
+    </ul>
+    <a href="/">⬅ Back Home</a>
+</body>
+</html>
+

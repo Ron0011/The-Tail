@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up - PetShop</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Create Account</h2>
+    <form action="/signup" method="post">
+      <input type="text" name="username" placeholder="Username" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <label style="font-weight:bold; color:#444;">Password:</label><br>
+      <input type="password" name="password" required 
+       style="width:100%; padding:8px 10px; margin-bottom:15px; border:1px solid #ccc; border-radius:6px; font-size:14px;"><br><br>
+
+       <label style="font-weight:bold; color:#444;">Confirm Password:</label><br>
+       <input type="password" name="confirm_password" required 
+       style="width:100%; padding:8px 10px; margin-bottom:15px; border:1px solid #ccc; border-radius:6px; font-size:14px;"><br><br>
+
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="/login">Login</a></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pet Shop — The Tails</title>
+  <link rel="stylesheet" href="/static/petshop.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo-text">THE TAILS</div>
+    </div>
+    <div class="auth">
+     <nav>
+      {% if user %}
+      <a href="/logout">🚪 Logout</a>
+    {% else %}
+      <a href="/login" class="btn">Login</a>
+      <a href="/signup" class="btn">Signup</a>
+      <a href="/admin/login" class="btn">Admin</a>
+    {% endif %}
+     </nav> 
+    </div>
+  </header>
+    <section class="hero">
+      <div class="hero-content">
+        <span class="eyebrow">WELCOME TO OUR</span>
+          <h1>Pet shop — find your new friend</h1>
+          <p class="lead">Be sure to feed him like one. Your new best friend is waiting for you with love and loyalty</p>
+          <a href="/pets/all" class="btn">SHOP NOW</a>
+        </div>
+      </div>
+    </section>
+    <section style="background:#fff; padding:50px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+  
+  <!-- Left side: Text -->
+  <div style="flex:1; min-width:300px; padding:20px;">
+    <h2 style="color:#333; font-size:28px; margin-bottom:20px;">ABOUT <span style="color:#00bfa5;">THE TAILS</span></h2>
+    <p style="color:#555; line-height:1.6; margin-bottom:20px;">
+  Welcome to PETO, your trusted partner for pet care and adoption.  
+  We provide reliable services and high–quality products for your pets.  
+  Our mission is to ensure that every pet receives the love, care, and attention they deserve.  
+  With a dedicated team and customer–first approach, PETO makes pet care simple and stress–free.
+    </p>
+
+
+    <ul style="list-style:none; padding:0; margin:0 0 20px 0; color:#333;">
+      <li style="margin-bottom:10px;">✔ Book Service 24/7</li>
+      <li style="margin-bottom:10px;">✔ Experienced, Professional Staff</li>
+      <li style="margin-bottom:10px;">✔ Insured & Background Checked</li>
+      <li style="margin-bottom:10px;">✔ Free In-Home Consultation</li>
+      <li style="margin-bottom:10px;">✔ Customer Satisfaction Surveys</li>
+    </ul>
+
+    <a href="/contact" style="display:inline-block; background:#333; color:#fff; padding:12px 25px; border-radius:25px; text-decoration:none; font-weight:bold;">
+      CONTACT US
+    </a>
+  </div>
+
+  <!-- Right side: Image -->
+  <div style="flex:1; min-width:300px; text-align:center; padding:20px;">
+    <img src="/static/images/pic6.jpg" alt="About Pet" style="max-width:100%; border-radius:30px;">
+  </div>
+
+</section>
+
+<picture>
+  <p></p>
+  <img src="/static/images/pic7.jpg" alt="banner" width="500" height="700" style ="text-align:left; border: 0px; border-radius:300px; padding:20px;">
+  <img src="/static/images/pic14.jpg" alt="banner" width="500" height="700" style ="text-align:center; margin-left: 70px; border-radius:300px; padding:20px;">
+  <img src="/static/images/pic21.jpg" alt="banner" width="500" height="700" style ="text-align:right; margin-left:90px; border: 0px; border-radius:300px; padding:20px;">
+</picture>
+<section>
+  <h2>PRODUCTS BY CATEGORY</h2>
+  <div class="filter-bar">
+    <a href="/pets/all" class="filter-btn {% if category=='all' %}active{% endif %}"><i class="fa-solid fa-paw"></i> All</a>
+    <a href="/pets/dogs" class="filter-btn {% if category=='dogs' %}active{% endif %}"><i class="fa-solid fa-dog"></i> Dogs</a>
+    <a href="/pets/cats" class="filter-btn {% if category=='cats' %}active{% endif %}"><i class="fa-solid fa-cat"></i> Cats</a>
+    <a href="/pets/birds" class="filter-btn {% if category=='birds' %}active{% endif %}"><i class="fa-solid fa-dove"></i> Birds</a>
+    <a href="/pets/fish" class="filter-btn {% if category=='fish' %}active{% endif %}"><i class="fa-solid fa-fish"></i> Fish</a>
+    <a href="/pets/rodents" class="filter-btn {% if category=='rodents' %}active{% endif %}"><i class="fa-solid fa-otter"></i> Rodents</a>
+  </div>
+
+  <div class="pets-grid">
+  {% for pet in pets %}
+  <div class="pet-card">
+    <img src="{{ pet.image_url }}" alt="{{ pet.name }}" width="150">
+    <h3>{{ pet.name }}</h3>
+    <p>Breed: {{ pet.breed }}</p>
+    <p class="price">₹{{ pet.price }}</p>
+    <div class="card-buttons">
+
+      <!-- Order Button (redirects to order page with pet id) -->
+      <form action="/order" method="get" style="display:inline;">
+        <input type="hidden" name="pet_id" value="{{ pet.id }}">
+        <button type="submit" class="order-btn">Order</button>
+      </form>
+
+      <!-- Add to Cart Button (future feature, optional) -->
+      <form action="/add_to_cart" method="post" style="display:inline;">
+        <input type="hidden" name="pet_id" value="{{ pet.id }}">
+        <button type="submit" class="adopt-btn">Add To Cart</button>
+      </form>
+
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+</section>
+
+<footer class="footer">
+
+  <!-- Newsletter -->
+  <div class="newsletter">
+    <h3>NEWSLETTER</h3>
+    <p>Stay up to date about product drops, news and special sales</p>
+    <form>
+      <input type="email" placeholder="Enter Your Email" required>
+      <button type="submit">SUBSCRIBE</button>
+    </form>
+  </div>
+
+  <!-- Footer Content -->
+
+  <div class="footer-main">
+    <div class="footer-box">
+      <h4>ADDRESS:</h4>
+      <p>📍 76, TA Koil Street, Thiruvanmiyur, Chennai, Tamil Nadu</p>
+    </div>
+
+    <div class="footer-box">
+      <h4>PHONE:</h4>
+      <p>📞 (+91)123 456 789</p>
+      <p>✉️ TheTails@gmail.com</p>
+    </div>
+
+    <div class="footer-box">
+      <h4>BUSINESS HOURS:</h4>
+      <p>🕒 Mon–Fri: 9.00–20.00</p>
+      <p>🕒 Sat–Sun: 10.00–16.00</p>
+    </div>
+
+    <div class="footer-box">
+      <h4>FOLLOW US:</h4>
+      <div class="social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+        <a href="#"><i class="fab fa-google-plus-g"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>

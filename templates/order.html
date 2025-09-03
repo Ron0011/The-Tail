@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Place Your Order</title>
+</head>
+<body style="font-family: Arial, sans-serif; background:#f8f9fa; margin:0; padding:0;">
+
+    <!-- Page Header -->
+    <header style="background:#ff6f61; color:white; padding:20px; text-align:center;">
+        <h1>PetShop - Delivery Information</h1>
+    </header>
+
+    <!-- Order Form Container -->
+    <div style="max-width:600px; margin:30px auto; background:#fff; padding:25px; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+
+        <h2 style="text-align:center; margin-bottom:20px; color:#333;">Enter Your Delivery Details</h2>
+
+        <form method="post" action="/place_order">
+
+            <label style="font-weight:bold; color:#444;">Full Name:</label><br>
+            <input type="text" name="full_name" required 
+                   style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:6px;"><br>
+
+            <label style="font-weight:bold; color:#444;">Phone Number:</label><br>
+            <input type="tel" name="phone" required 
+                   style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:6px;"><br>
+
+            <label style="font-weight:bold; color:#444;">Email Address:</label><br>
+            <input type="email" name="email" required 
+                   style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:6px;"><br>
+
+            <label style="font-weight:bold; color:#444;">Delivery Address:</label><br>
+            <textarea name="address" rows="3" required 
+                      style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:6px;"></textarea><br>
+
+            <label style="font-weight:bold; color:#444;">City:</label><br>
+            <input type="text" name="city" required 
+                   style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:6px;"><br>
+
+            <label style="font-weight:bold; color:#444;">Pincode:</label><br>
+            <input type="text" name="pincode" required 
+                   style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:6px;"><br>
+
+            <label style="font-weight:bold; color:#444;">State:</label><br>
+            <input type="text" name="state" required 
+                   style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:6px;"><br>
+
+            <label style="font-weight:bold; color:#444;">Country:</label><br>
+            <input type="text" name="country" required 
+                   style="width:100%; padding:10px; margin-bottom:20px; border:1px solid #ccc; border-radius:6px;"><br>
+
+           
+    <!-- all input fields -->
+            <button type="submit" 
+                    style="width:100%; padding:12px; background:#ff6f61; color:white; font-size:16px; border:none; border-radius:6px; cursor:pointer;">
+                    Place Order
+            </button>
+        </form>
+
+    </div>
+
+    <!-- Footer -->
+    <footer style="background:#333; color:white; text-align:center; padding:15px; margin-top:30px;">
+        <p>&copy; 2025 PetShop | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>
