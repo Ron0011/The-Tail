@@ -1,4 +1,4 @@
-/* Reset */
+
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +12,6 @@ body {
   line-height: 1.5;
 }
 
-/* Header */
 header {
   background: #2563eb;
   color: #fff;
@@ -37,7 +36,7 @@ nav a.active, nav a:hover {
   text-decoration: underline;
 }
 
-/* Main */
+
 main {
   max-width: 600px;
   margin: 40px auto;
@@ -49,7 +48,7 @@ main h2 {
   color: #111827;
 }
 
-/* Form Box */
+
 .form-container {
   background: #fff;
   padding: 25px;
