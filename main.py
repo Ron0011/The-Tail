@@ -8,17 +8,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session, relationship
 import os, shutil
 
-# ====================
-# Database Setup
-# ====================
 DATABASE_URL = "sqlite:///./petshop.db"
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-# ====================
-# Models
-# ====================
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, index=True)
@@ -55,14 +49,8 @@ class Order(Base):
     user = relationship("User", back_populates="orders")
 
 
-# ====================
-# Create tables FIRST
-# ====================
 Base.metadata.create_all(bind=engine)
 
-# ====================
-# Ensure default admin
-# ====================
 def create_admin():
     db = SessionLocal()
     admin = db.query(User).filter(User.username == "admin").first()
@@ -75,9 +63,6 @@ def create_admin():
 create_admin()
 
 
-# ====================
-# App Setup
-# ====================
 app = FastAPI()
 app.add_middleware(SessionMiddleware, secret_key="supersecret")
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -90,9 +75,6 @@ def get_db():
     finally:
         db.close()
 
-# ====================
-# Routes
-# ====================
 
 # Home - show pets
 @app.get("/", response_class=HTMLResponse)
@@ -104,7 +86,7 @@ def home(request: Request, db: Session = Depends(get_db)):
 def home(request: Request, db: Session = Depends(get_db)):
     pets = db.query(Pet).all()
     user = request.session.get("user")
-    user = request.session.get("admin")   # ✅ get logged-in user
+    user = request.session.get("admin")   
     return templates.TemplateResponse(
         "petshop.html",
         {"request": request, "pets": pets, "user": user},
@@ -237,7 +219,7 @@ def place_order(
     full_name: str = Form(...),
     phone: str = Form(...),
     email: str = Form(...),
-    address: str = Form(...),     # ✅ make sure we receive this
+    address: str = Form(...),    
     city: str = Form(...),
     pincode: str = Form(...),
     state: str = Form(...),
@@ -253,7 +235,7 @@ def place_order(
         full_name=full_name,
         phone=phone,
         email=email,
-        address=address,   # ✅ now this works
+        address=address,   
         city=city,
         pincode=pincode,
         state=state,
@@ -266,7 +248,7 @@ def place_order(
     return templates.TemplateResponse(
     "order_success.html",
     {"request": request, "order": order},
-    status_code=200   # 👈 important
+    status_code=200  
 )
 
 
