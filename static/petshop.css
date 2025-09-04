@@ -11,7 +11,6 @@ body {
   line-height: 1.5;
 }
 
-/* === HEADER === */
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -58,7 +57,6 @@ body {
   color: #000;
 }
 
-/* === HERO SECTION === */
 .hero {
   background: url("/static/images/pic10.jpg") no-repeat center center/cover;
   height: 100vh;
@@ -250,7 +248,7 @@ h2{
   background: #00c2b2;
 }
 
-/* Newsletter */
+
 footer{
     background: url("/static/images/pic23.jpg") no-repeat center center/cover;
     height: 400px;
