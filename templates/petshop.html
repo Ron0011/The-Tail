@@ -16,7 +16,7 @@
     <div class="auth">
      <nav>
       {% if user %}
-      <a href="/logout">🚪 Logout</a>
+      <a href="/logout"> Logout</a>
     {% else %}
       <a href="/login" class="btn">Login</a>
       <a href="/signup" class="btn">Signup</a>
@@ -92,13 +92,11 @@
     <p class="price">₹{{ pet.price }}</p>
     <div class="card-buttons">
 
-      <!-- Order Button (redirects to order page with pet id) -->
       <form action="/order" method="get" style="display:inline;">
         <input type="hidden" name="pet_id" value="{{ pet.id }}">
         <button type="submit" class="order-btn">Order</button>
       </form>
-
-      <!-- Add to Cart Button (future feature, optional) -->
+      
       <form action="/add_to_cart" method="post" style="display:inline;">
         <input type="hidden" name="pet_id" value="{{ pet.id }}">
         <button type="submit" class="adopt-btn">Add To Cart</button>
@@ -126,7 +124,7 @@
   <div class="footer-main">
     <div class="footer-box">
       <h4>ADDRESS:</h4>
-      <p>📍 76, TA Koil Street, Thiruvanmiyur, Chennai, Tamil Nadu</p>
+      <p> 76, TA Koil Street, Thiruvanmiyur, Chennai, Tamil Nadu</p>
     </div>
 
     <div class="footer-box">
