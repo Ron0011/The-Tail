@@ -19,7 +19,7 @@ class User(Base):
     username = Column(String, unique=True)
     email = Column(String, unique=True)
     password = Column(String)
-    role = Column(String)  # "user" or "admin"
+    role = Column(String) 
 
     orders = relationship("Order", back_populates="user")
 
@@ -76,7 +76,6 @@ def get_db():
         db.close()
 
 
-# Home - show pets
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request, db: Session = Depends(get_db)):
     pets = db.query(Pet).all()
@@ -93,8 +92,6 @@ def home(request: Request, db: Session = Depends(get_db)):
         status_code=200
     )
 
-
-# ---------- Signup ----------
 @app.get("/signup", response_class=HTMLResponse)
 def signup_page(request: Request):
     return templates.TemplateResponse("signup.html", {"request": request})
@@ -106,7 +103,6 @@ def signup(username: str = Form(...), email: str = Form(...), password: str = Fo
     db.commit()
     return RedirectResponse("/login", status_code=303)
 
-# ---------- Login ----------
 @app.get("/login", response_class=HTMLResponse)
 def login_page(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
@@ -144,8 +140,6 @@ def admin_login(
         return RedirectResponse("/admin_dashboard", status_code=303)
     return RedirectResponse("/admin/login", status_code=303)
 
-
-# ---------- User Dashboard ----------
 @app.get("/user_dashboard", response_class=HTMLResponse)
 def user_dashboard(request: Request, db: Session = Depends(get_db)):
     user = request.session.get("user")
@@ -154,7 +148,6 @@ def user_dashboard(request: Request, db: Session = Depends(get_db)):
     orders = db.query(Order).filter(Order.user_id == user["id"]).all()
     return templates.TemplateResponse("user_dashboard.html", {"request": request, "user": user, "orders": orders})
 
-# ---------- Admin Dashboard ----------
 @app.get("/admin_dashboard", response_class=HTMLResponse)
 def admin_dashboard(request: Request, db: Session = Depends(get_db)):
     user = request.session.get("user")
@@ -165,7 +158,6 @@ def admin_dashboard(request: Request, db: Session = Depends(get_db)):
     pets = db.query(Pet).all()
     return templates.TemplateResponse("admin_dashboard.html", {"request": request, "user": user, "users": users, "orders": orders, "pets": pets})
 
-# ---------- Add Pet ----------
 UPLOAD_DIR = "static/images"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
@@ -181,13 +173,11 @@ async def add_pet(
     image: UploadFile = File(...),
     db: Session = Depends(get_db)
 ):
-    # Save file to static/images/
     contents = await image.read()
     file_location = f"static/images/{image.filename}"
     with open(file_location, "wb") as f:
         f.write(contents)
 
-    # Store in DB
     pet = Pet(name=name, category=category, price=price, image_url=f"/{file_location}")
     db.add(pet)
     db.commit()
@@ -195,9 +185,6 @@ async def add_pet(
     return RedirectResponse("/admin_dashboard", status_code=303)
 
     
-
-
-# ---------- Remove Pet ----------
 @app.post("/admin/delete_pet/{pet_id}")
 def delete_pet(pet_id: int, db: Session = Depends(get_db)):
     pet = db.query(Pet).filter(Pet.id == pet_id).first()
@@ -206,13 +193,10 @@ def delete_pet(pet_id: int, db: Session = Depends(get_db)):
         db.commit()
     return RedirectResponse("/admin_dashboard", status_code=303)
 
-# ---------- Place Order ----------
-# Show order page
 @app.get("/order", response_class=HTMLResponse)
 def order_page(request: Request):
     return templates.TemplateResponse("order.html", {"request": request})
 
-# Handle order submission
 @app.post("/place_order")
 def place_order(
     request: Request,
@@ -252,8 +236,6 @@ def place_order(
 )
 
 
-
-# ---------- Logout ----------
 @app.get("/logout")
 def logout(request: Request):
     request.session.clear()
